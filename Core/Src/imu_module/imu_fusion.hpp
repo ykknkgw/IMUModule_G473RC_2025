@@ -39,6 +39,7 @@ public:
         using namespace calibration_data;
         calcu_imu_bias_from_3pose_data(gyro_biases_, acc_biases_);
 
+        printf("test 1\n");
         printf("bias\n");
         for (size_t i = 0; i < NUM_SENSOR; i++) {
             fusion_gyro_weights_.x[i] = init_weight;
@@ -54,8 +55,8 @@ public:
             gyro_bias_array_.y[i] = static_cast<q15_t>(gyro_biases_[i].y() / gyro_sense);
             gyro_bias_array_.z[i] = static_cast<q15_t>(gyro_biases_[i].z() / gyro_sense);
 
-            // printf("%.3f,%.3f,%.3f,%d\n", gyro_biases_[i].x(), gyro_sense, gyro_biases_[i].x() / gyro_sense,
-            //        gyro_bias_array_.x[i]);
+            //printf("%.3f,%.3f,%.3f,%d\n", gyro_biases_[i].x(), gyro_sense, gyro_biases_[i].x() / gyro_sense,
+            //       gyro_bias_array_.x[i]);
 
             // printf("%d,%d,%d,%d,%d,%d\n", acc_bias_array_.x[i], acc_bias_array_.y[i], acc_bias_array_.z[i],
             //        gyro_bias_array_.x[i], gyro_bias_array_.y[i], gyro_bias_array_.z[i]);

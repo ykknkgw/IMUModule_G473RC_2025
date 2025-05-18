@@ -223,7 +223,7 @@ private:
             // 7us/6us (1回目だけ7us)
             uint8_t output[32];
             bit_transpose_8x32_32bit(port_reads_, output);
-            for (int ch = 0; ch < NUM_SENSOR; ch++) {
+            for (size_t ch = 0; ch < NUM_SENSOR; ch++) {
                 *(data[pin_bit_num_[ch]] + b) = output[ch];
             }
         }

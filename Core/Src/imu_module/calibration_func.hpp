@@ -58,7 +58,8 @@ void imu_bias_calibration() {
         HAL_Delay(1);
     }
 
-    printf("%d/%d\n", 0, (1UL << NUM_AVG_BATCH_SHIFT));
+    printf("buffer/n");
+    printf("%d/%lu\n", 0, (1UL << NUM_AVG_BATCH_SHIFT));
 
     main_ticker.attach(
         [&]() {
@@ -116,7 +117,7 @@ void imu_bias_calibration() {
                 sampling_cnt = 0;
                 avg_cnt++;
 
-                printf("%d/%d\n", avg_cnt, (1UL << NUM_AVG_BATCH_SHIFT));
+                printf("%d/%lu\n", avg_cnt, (1UL << NUM_AVG_BATCH_SHIFT));
             }
         },
         2); // 1kHzで呼び出す

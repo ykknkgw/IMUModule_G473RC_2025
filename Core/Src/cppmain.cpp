@@ -58,7 +58,7 @@ void all_tests() {
 void all_calibration() {
     using namespace imu_module;
 
-    // calibration_func::imu_bias_calibration();
+   // calibration_func::imu_bias_calibration(); //yuki
     calibration_func::check_imu_bias();
 }
 
@@ -87,7 +87,14 @@ extern "C" void cppmain() {
         imu_fusion.update();
         latest_gyro_data = imu_fusion.get_gyro_fusion();
         latest_acc_data = imu_fusion.get_acc_fusion();
+        //Vector3f gyro = imu_fusion.get_gyro_fusion();
+       // printf("main ticker gyro fusion %.3f,\t %.3f,\t %.3f\r\n", gyro.x() * 100, gyro.y() * 100, gyro.z() * 100);
+        Vector3f acc = imu_fusion.get_acc_fusion();
+        printf("main ticker gyro fusion \t%.3f,\t%.3f,\t%.3f\r\n", acc.x(), acc.y(), acc.z());
+//        Vector3f gyro_raw = imu_fusion.get_gyro(0);
+//        printf("main_ticker gyro %.3f,%.3f\n", gyro_raw.x() * 100, gyro.x() * 100);
     });
+
 
     // SPI buffer update & start next transfer on DMA complete
     spi_slave.on_dma_complete([&]() {
@@ -107,6 +114,9 @@ extern "C" void cppmain() {
 
         spi_slave.write_read(tx_buf, rx_buf, 12, 10);
     });
+
+    printf("kiteru?\n");
+    printf("is_dma_enabled: %d\n", spi_slave.is_dma_enabled());
 
     // Start first transfer
     spi_slave.write_read(tx_buf, rx_buf, 12, 10);

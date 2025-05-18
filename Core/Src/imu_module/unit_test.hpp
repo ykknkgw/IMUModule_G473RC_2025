@@ -2,6 +2,10 @@
 
 #include "board.hpp"
 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
 namespace imu_module {
 
 #define printf_test_func()                                                                                             \
@@ -232,7 +236,7 @@ void imu_gyro_fusion_test() {
 
     imu_fusion.begin();
 
-    constexpr float earth_rotation_rate_rad_per_sec = 360.0f / 86400.0f * M_PI / 180.0f;
+//    constexpr float earth_rotation_rate_rad_per_sec = 360.0f / 86400.0f * M_PI / 180.0f;
 
     main_ticker.attach([&]() {
         imu_fusion.update();
@@ -240,7 +244,7 @@ void imu_gyro_fusion_test() {
         printf("%.3f,%.3f,%.3f\r\n", gyro.x() * 100, gyro.y() * 100, gyro.z() * 100);
         Vector3f gyro_raw = imu_fusion.get_gyro(0);
 
-        // printf("%.3f,%.3f\n", gyro_raw.x() * 100, gyro.x() * 100);
+        printf("%.3f,%.3f\n", gyro_raw.x() * 100, gyro.x() * 100);
         // printf("%.8f\n", gyro.x());
     });
 
